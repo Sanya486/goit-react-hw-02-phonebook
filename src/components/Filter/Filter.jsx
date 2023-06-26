@@ -1,13 +1,15 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
+import { Lable, Input } from 'components/Styled-Component/Styled';
+
 const Filter = ({text, onChange}) => {
   return (
     <div>
-      <label>
+          <Lable style={{ width: 200 }}>
         Find contacts by name
-        <input type="text" value={text} onChange={onChange} />
-      </label>
+        <Input type="text" value={text} onChange={onChange} />
+      </Lable>
     </div>
   );
 }

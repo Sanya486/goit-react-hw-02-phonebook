@@ -1,11 +1,15 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { nanoid } from 'nanoid';
+
+
+import { Container, Ul } from './Styled-Component/Styled';
 
 import Title from './Title/Title';
 import Form from './Form/Form';
-import ContactList from './ContactList/ContactList';
+import Contact from './Contact/Contact';
 import Filter from './Filter/Filter';
+
+
 
 export default class App extends Component {
   // static propTypes = {
@@ -20,20 +24,20 @@ export default class App extends Component {
       { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },
     ],
     filter: '',
-    name: '',
-    number: '',
   };
 
-  addNewContact = e => {
-    e.preventDefault();
-
-    const id = nanoid();
-    const name = e.target.elements.name.value;
-    const number = e.target.elements.number.value;
-
-    this.setState(prevState => {
+  addNewContact = (e, id, name, number) => {
+    const isContactExist = this.state.contacts.some(contact => contact.name === name)
+    
+    if (!isContactExist) {
+      this.setState(prevState => {
       return { contacts: [...prevState.contacts, { id, name, number }] };
     });
+    }
+    else {
+      alert('This name has already exist! Write another one!')
+    }
+   
   };
 
   onFilterChange = e => {
@@ -41,24 +45,35 @@ export default class App extends Component {
   };
 
   onActiveFilter = () => {
-    
     return this.state.contacts.filter(contact => contact.name.includes(this.state.filter))
-    
+  }
+
+  deleteContact = (id) => {
+    this.setState(prevState => {
+      return {
+        contacts: prevState.contacts.filter(contact => contact.id !== id)
+      }
+    })
   }
 
   render() {
     return (
-      <>
+      <Container>
         <Title text="Phonebook"></Title>
         <Form onSubmit={this.addNewContact}>\</Form>
         <Title text="Contacts"></Title>
         <Filter text={this.state.filter} onChange={this.onFilterChange} />
-        <ContactList
-          contacts={
-            this.state.filter === '' ? this.state.contacts : this.onActiveFilter()
-          }
-        />
-      </>
+        <Ul>
+          <Contact
+            contacts={
+              this.state.filter === ''
+                ? this.state.contacts
+                : this.onActiveFilter()
+            }
+            deleteContact={this.deleteContact}
+          />
+        </Ul>
+      </Container>
     );
   }
 }

@@ -1,29 +1,44 @@
-import React, { Component } from 'react'
-import PropTypes from 'prop-types'
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+
+import { nanoid } from 'nanoid';
+
+import {
+  FormTag,
+  Lable,
+  Input,
+  Button,
+} from 'components/Styled-Component/Styled';
+
+
 
 export default class Form extends Component {
-    
-//   static propTypes = {
-//     prop: PropTypes
-//     }
+  //   static propTypes = {
+  //     prop: PropTypes
+  //     }
 
-    state = {
-        name: '',
-        number: ''
-    }
+  state = {
+    name: '',
+    number: '',
+  };
 
-    onInputChange = (e) => {
-        this.setState({ [e.target.name] : e.target.value })
-    }
+  submitHandler = e => {
+    e.preventDefault();
+    const id = nanoid();
+    this.props.onSubmit(e, id, this.state.name, this.state.number);
+    this.setState({ name: '', number: '' });
+  };
 
+  onInputChange = e => {
+    this.setState({ [e.target.name]: e.target.value });
+  };
 
   render() {
     return (
-      <form onSubmit={this.props.onSubmit}>
-        <label>
-          {' '}
+      <FormTag onSubmit={this.submitHandler}>
+        <Lable>
           Name
-          <input
+          <Input
             type="text"
             name="name"
             value={this.state.name}
@@ -32,22 +47,21 @@ export default class Form extends Component {
             required
             onChange={this.onInputChange}
           />
-        </label>
-        <label>
-          {' '}
+        </Lable>
+        <Lable>
           Number
-          <input
+          <Input
             type="tel"
             name="number"
-            value={this.state.number}
+            value={this.state.number.trim()}
             pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
             title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
             required
             onChange={this.onInputChange}
           />
-        </label>
-        <button type="submit">Add contact</button>
-      </form>
+        </Lable>
+        <Button type="submit">Add contact</Button>
+      </FormTag>
     );
   }
 }
