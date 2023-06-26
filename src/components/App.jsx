@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-
 
 import { Container, Ul } from './Styled-Component/Styled';
 
@@ -9,12 +7,7 @@ import Form from './Form/Form';
 import Contact from './Contact/Contact';
 import Filter from './Filter/Filter';
 
-
-
 export default class App extends Component {
-  // static propTypes = {
-  //   prop: PropTypes,
-  // };
 
   state = {
     contacts: [
@@ -26,7 +19,7 @@ export default class App extends Component {
     filter: '',
   };
 
-  addNewContact = (e, id, name, number) => {
+  addNewContact = (id, name, number) => {
     const isContactExist = this.state.contacts.some(contact => contact.name === name)
     
     if (!isContactExist) {

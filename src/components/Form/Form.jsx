@@ -13,9 +13,10 @@ import {
 
 
 export default class Form extends Component {
-  //   static propTypes = {
-  //     prop: PropTypes
-  //     }
+    
+  static propTypes = {
+    onSubmit: PropTypes.func.isRequired,
+  };
 
   state = {
     name: '',
@@ -25,7 +26,7 @@ export default class Form extends Component {
   submitHandler = e => {
     e.preventDefault();
     const id = nanoid();
-    this.props.onSubmit(e, id, this.state.name, this.state.number);
+    this.props.onSubmit(id, this.state.name, this.state.number);
     this.setState({ name: '', number: '' });
   };
 
