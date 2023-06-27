@@ -9,7 +9,7 @@ import {
   Lable,
   Input,
   Button,
-} from 'components/Styled-Component/Styled';
+} from './Form.styled';
 
 
 
@@ -26,6 +26,7 @@ export default class Form extends Component {
 
   submitHandler = e => {
     e.preventDefault();
+    
     const nameExp = new RegExp(
       "^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
     );

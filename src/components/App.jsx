@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import { Container, Ul } from './Styled-Component/Styled';
+import { Container, Ul } from './App.styled';
 
 import Title from './Title/Title';
 import Form from './Form/Form';
@@ -20,7 +20,7 @@ export default class App extends Component {
   };
 
   addNewContact = (id, name, number) => {
-    const isContactExist = this.state.contacts.some(contact => contact.name === name)
+    const isContactExist = this.state.contacts.some(contact => contact.name.toLocaleLowerCase() === name.toLocaleLowerCase())
     
     if (!isContactExist) {
       this.setState(prevState => {

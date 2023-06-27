@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import { Button, Li } from 'components/Styled-Component/Styled';
+import { Button, Li } from './Contact.styled';
 
 const Contact = ({ contacts, deleteContact }) => {
   return (
@@ -23,9 +23,9 @@ const Contact = ({ contacts, deleteContact }) => {
 Contact.propTypes = {
   contacts: PropTypes.arrayOf(
     PropTypes.shape({
-      id: PropTypes.string,
-      name: PropTypes.string,
-      number: PropTypes.string,
+      id: PropTypes.string.isRequired,
+      name: PropTypes.string.isRequired,
+      number: PropTypes.string.isRequired,
     })
   ),
   deleteContact: PropTypes.func.isRequired,
