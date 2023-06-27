@@ -24,7 +24,7 @@ export default class App extends Component {
     
     if (!isContactExist) {
       this.setState(prevState => {
-      return { contacts: [...prevState.contacts, { id, name, number }] };
+      return { contacts: [{ id, name, number }, ...prevState.contacts ] };
     });
     }
     else {
